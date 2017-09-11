@@ -1,4 +1,5 @@
 require "clapper/version"
+require "audio-playback"
 
 module Clapper
   def self.clap
@@ -6,6 +7,13 @@ module Clapper
   end
 
   def self.compare(example_list)
+    output = AudioPlayback::Device::Output.gets
+    options = {
+      :channels => [0,1],
+      :latency => 1,
+      :output_device => output
+    }
+
     if !File.exist?("tests.txt")
       f = File.new("tests.txt", "w+")
     else
@@ -24,8 +32,12 @@ module Clapper
     example_list.each do |example|
       if parsed_examples[example.id] == nil && example.execution_result.status == :passed
         p "CLAP!!!"
+        playback = AudioPlayback.play("audio/Clapping.wav", options)
+        playback.block
       elsif parsed_examples[example.id] == :failed && example.execution_result.status == :passed
         p "CLAP!!"
+        playback = AudioPlayback.play("audio/Clapping.wav", options)
+        playback.block
       else
         p "NO CLAP...."
       end
