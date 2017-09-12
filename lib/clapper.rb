@@ -7,11 +7,15 @@ module Clapper
   end
 
   def self.compare(example_list)
-    output = AudioPlayback::Device::Output.gets
+    # output = AudioPlayback::Device::Output.gets
+    output = AudioPlayback::Device::Output.by_id(1)
+    # p "*" * 100
+    # p output
     options = {
       :channels => [0,1],
       :latency => 1,
-      :output_device => output
+      :output_device => output,
+      :duration => 5
     }
 
     if !File.exist?("tests.txt")
@@ -27,23 +31,22 @@ module Clapper
       parsed_examples[old_examples[i].chomp] = old_examples[i+1].chomp.to_sym
       i += 2
     end
-
+    will_clap = false
     f = File.open("tests.txt", "w+")
     example_list.each do |example|
       if parsed_examples[example.id] == nil && example.execution_result.status == :passed
-        p "CLAP!!!"
-        playback = AudioPlayback.play("audio/Clapping.wav", options)
-        playback.block
+        will_clap = true
       elsif parsed_examples[example.id] == :failed && example.execution_result.status == :passed
-        p "CLAP!!"
-        playback = AudioPlayback.play("audio/Clapping.wav", options)
-        playback.block
-      else
-        p "NO CLAP...."
+        will_clap = true
       end
       f.write("#{example.id}\n")
       f.write("#{example.execution_result.status}\n")
     end
     f.close
+
+    if will_clap
+      playback = AudioPlayback.play("audio/Clapping.wav", options)
+      playback.block
+    end
   end
 end
