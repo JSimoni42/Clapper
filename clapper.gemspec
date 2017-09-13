@@ -7,10 +7,11 @@ Gem::Specification.new do |spec|
   spec.name          = "clapper"
   spec.version       = Clapper::VERSION
   spec.authors       = ["John Simoni"]
-  spec.email         = ["  \"email\": null,"]
+  spec.email         = "jsimoni03@gmail.com"
 
   spec.summary       = %q{Clapper!}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
+  spec.homepage      = "https://github.com/JSimoni42/Clapper"
+  spec.description   = "A gem that claps when you pass Rspec tests. See github page for instructions on how to use."
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
