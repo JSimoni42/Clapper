@@ -1,4 +1,0 @@
-./spec/clapper_spec.rb[1:1]
-passed
-./spec/clapper_spec.rb[1:2]
-failed
