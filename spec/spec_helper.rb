@@ -13,7 +13,6 @@ RSpec.configure do |config|
   end
 
   config.after(:suite) do
-    examples = RSpec.world.filtered_examples.values.flatten
-    Clapper.compare(examples)
+    Clapper.compare(RSpec.world.filtered_examples.values.flatten)
   end
 end
