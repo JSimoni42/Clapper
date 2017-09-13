@@ -8,7 +8,6 @@ Gem::Specification.new do |spec|
   spec.version       = Clapper::VERSION
   spec.authors       = ["John Simoni"]
   spec.email         = "jsimoni03@gmail.com"
-
   spec.summary       = %q{Clapper!}
   spec.homepage      = "https://github.com/JSimoni42/Clapper"
   spec.description   = "A gem that claps when you pass Rspec tests. See github page for instructions on how to use."
