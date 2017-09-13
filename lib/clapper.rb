@@ -1,5 +1,6 @@
 require "clapper/version"
 require "audio-playback"
+require 'csv'
 
 module Clapper
   def self.clappy
@@ -10,17 +11,16 @@ module Clapper
     f = Clapper.openFile
     old_examples = f.readlines
     f.close
-    parsed_examples = Clapper.parse_examples(old_examples)
+    p parsed_examples = Clapper.parse_examples(old_examples)
     will_clap = false
-    f = File.open("tests.txt", "w+")
+    f = CSV.open("tests.csv", "w")
     example_list.each do |example|
       if parsed_examples[example.id] == nil && example.execution_result.status == :passed
         will_clap = true
       elsif parsed_examples[example.id] == :failed && example.execution_result.status == :passed
         will_clap = true
       end
-      f.write("#{example.id}\n")
-      f.write("#{example.execution_result.status}\n")
+      f << [example.id, example.execution_result.status]
     end
     f.close
 
@@ -30,21 +30,18 @@ module Clapper
   private
 
   def self.openFile
-    if !File.exist?("tests.txt")
-      File.new("tests.txt", "w+")
+    if !File.exist?("tests.csv")
+      CSV.new(File.new("tests.csv", "w+"))
     else
-      File.open("tests.txt", "r+")
+      CSV.open("tests.csv", "r+")
     end
   end
 
   def self.parse_examples(old_examples)
-    parsed_examples = {}
-    i = 0
-    while i+1 < old_examples.length
-      parsed_examples[old_examples[i].chomp] = old_examples[i+1].chomp.to_sym
-      i += 2
+    old_examples.reduce({}) do |acc, example_row|
+      acc[example_row[0]] = example_row[1].to_sym
+      acc
     end
-    parsed_examples
   end
 
   def self.clap(will_clap)
