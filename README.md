@@ -20,10 +20,18 @@ Or install it yourself as:
 
 ## Usage
 
-This gem makes use of [audio-playback](https://github.com/arirusso/audio-playback), which requires both libsndfile and portaudio.
+Add the following lines to your gem's `spec-helper` file
+
+```ruby
+config.after(:suite) do
+  Clapper.compare(RSpec.world.filtered_examples.values.flatten)
+end
+```
+
+This gem makes use of [audio-playback](https://github.com/arirusso/audio-playback), which requires both **libsndfile** and **portaudio**.
 Both libraries are definitely available on *Homebrew* and likely available on *APT*, *YUM*, as well as other package managers.
 
-Currently, running bin/setup will attempt to install both via Homebrew.
+Currently, running `bin/setup` will attempt to install both via Homebrew.
 
 ## Development
 
