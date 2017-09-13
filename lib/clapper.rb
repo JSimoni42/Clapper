@@ -2,18 +2,11 @@ require "clapper/version"
 require "audio-playback"
 
 module Clapper
-  def self.clap
+  def self.clappy
     return 'Clap!'
   end
 
   def self.compare(example_list)
-    output = AudioPlayback::Device::Output.by_id(1)
-    options = {
-      :channels => [0,1],
-      :latency => 1,
-      :output_device => output,
-      :duration => 5
-    }
     f = Clapper.openFile
     old_examples = f.readlines
     f.close
@@ -31,10 +24,7 @@ module Clapper
     end
     f.close
 
-    if will_clap
-      playback = AudioPlayback.play("audio/Clapping.wav", options)
-      playback.block
-    end
+    Clapper.clap(will_clap)
   end
 
   private
@@ -55,5 +45,19 @@ module Clapper
       i += 2
     end
     parsed_examples
+  end
+
+  def self.clap(will_clap)
+    output = AudioPlayback::Device::Output.by_id(1)
+    options = {
+      :channels => [0,1],
+      :latency => 1,
+      :output_device => output,
+      :duration => 5
+    }
+    if will_clap
+      playback = AudioPlayback.play("audio/Clapping.wav", options)
+      playback.block
+    end
   end
 end
