@@ -11,7 +11,7 @@ module Clapper
     f = Clapper.openFile
     old_examples = f.readlines
     f.close
-    p parsed_examples = Clapper.parse_examples(old_examples)
+    parsed_examples = Clapper.parse_examples(old_examples)
     will_clap = false
     f = CSV.open("tests.csv", "w")
     example_list.each do |example|
