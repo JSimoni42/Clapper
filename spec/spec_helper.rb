@@ -12,7 +12,7 @@ RSpec.configure do |config|
     c.syntax = :expect
   end
 
-  config.after(:suite) do
-    Clapper.compare(RSpec.world.filtered_examples.values.flatten)
-  end
+  # config.after(:suite) do
+  #   Clapper.compare(RSpec.world.filtered_examples.values.flatten)
+  # end
 end

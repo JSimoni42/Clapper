@@ -3,10 +3,6 @@ require "audio-playback"
 require 'csv'
 
 module Clapper
-  def self.clappy
-    return 'Clap!'
-  end
-
   def self.compare(example_list)
     f = Clapper.openFile
     old_examples = f.readlines
