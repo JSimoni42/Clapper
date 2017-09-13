@@ -1,8 +1,6 @@
 # Clapper
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/clapper`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+A gem to encourage TDD. Applauds when you pass new tests.
 
 ## Installation
 
@@ -22,7 +20,18 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Add the following lines to your gem's `spec-helper` file
+
+```ruby
+config.after(:suite) do
+  Clapper.compare(RSpec.world.filtered_examples.values.flatten)
+end
+```
+
+This gem makes use of [audio-playback](https://github.com/arirusso/audio-playback), which requires both **libsndfile** and **portaudio**.
+Both libraries are definitely available on *Homebrew* and likely available on *APT*, *YUM*, as well as other package managers.
+
+Currently, running `bin/setup` will attempt to install both via Homebrew.
 
 ## Development
 
@@ -32,7 +41,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/clapper.
+Bug reports and pull requests are welcome on GitHub at https://github.com/JSimoni42/clapper.
 
 ## License
 
