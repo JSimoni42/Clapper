@@ -31,9 +31,6 @@ end
 This gem makes use of [audio-playback](https://github.com/arirusso/audio-playback), which requires both **libsndfile** and **portaudio**.
 Both libraries are definitely available on *Homebrew* and likely available on *APT*, *YUM*, as well as other package managers.
 
-Currently, running `bin/setup` will attempt to install both via Homebrew. If you don't have Homebrew, feel free to remove lines 6 and 7 from `bin/setup`
-and install **libsndfile** and **portaudio** through other sources before attempting to run `bundle install`
-
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
