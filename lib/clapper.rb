@@ -49,6 +49,7 @@ module Clapper
   end
 
   def self.path_to_testfile
-    File.join(File.dirname(__FILE__), '../assets/tests.csv')
+    # File.join(File.dirname(__FILE__), '../assets/tests.csv')
+    "tests.csv"
   end
 end
