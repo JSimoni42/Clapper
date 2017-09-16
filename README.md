@@ -28,8 +28,7 @@ config.after(:suite) do
 end
 ```
 
-This gem makes use of [audio-playback](https://github.com/arirusso/audio-playback), which requires both **libsndfile** and **portaudio**.
-Both libraries are definitely available on *Homebrew* and likely available on *APT*, *YUM*, as well as other package managers.
+This gem makes use of [sox](http://sox.sourceforge.net/) for audio playback, which must be installed separately.
 
 ## Development
 
