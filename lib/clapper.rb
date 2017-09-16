@@ -1,5 +1,4 @@
 require "clapper/version"
-require "audio-playback"
 require 'csv'
 
 module Clapper
@@ -9,7 +8,7 @@ module Clapper
     f.close
     parsed_examples = Clapper.parse_examples(old_examples)
     will_clap = false
-    f = CSV.open("tests.csv", "w")
+    f = CSV.open(Clapper.path_to_testfile, "w")
     example_list.each do |example|
       if parsed_examples[example.id] == nil && example.execution_result.status == :passed
         will_clap = true
@@ -19,17 +18,16 @@ module Clapper
       f << [example.id, example.execution_result.status]
     end
     f.close
-
     Clapper.clap(will_clap)
   end
 
   private
 
   def self.openFile
-    if !File.exist?("tests.csv")
-      CSV.new(File.new("tests.csv", "w+"))
+    if !File.exist?(Clapper.path_to_testfile)
+      CSV.new(File.new(Clapper.path_to_testfile, "w+"))
     else
-      CSV.open("tests.csv", "r+")
+      CSV.open(Clapper.path_to_testfile, "r+")
     end
   end
 
@@ -41,16 +39,16 @@ module Clapper
   end
 
   def self.clap(will_clap)
-    output = AudioPlayback::Device::Output.by_id(1)
-    options = {
-      :channels => [0,1],
-      :latency => 1,
-      :output_device => output,
-      :duration => 5
-    }
     if will_clap
-      playback = AudioPlayback.play("audio/Clapping.wav", options)
-      playback.block
+      `play #{Clapper.path_to_audio} trim 0 5`
     end
+  end
+
+  def self.path_to_audio
+    File.join(File.dirname(__FILE__), '../assets/Clapping.wav')
+  end
+
+  def self.path_to_testfile
+    File.join(File.dirname(__FILE__), '../assets/tests.csv')
   end
 end
