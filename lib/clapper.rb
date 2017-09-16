@@ -40,18 +40,9 @@ module Clapper
   end
 
   def self.clap(will_clap)
-    # output = AudioPlayback::Device::Output.by_id(1)
-    # options = {
-    #   :channels => [0,1],
-    #   :latency => 1,
-    #   :output_device => output,
-    #   :duration => 5
-    # }
-    # if will_clap
-    #   playback = AudioPlayback.play(Clapper.path_to_audio, options)
-    #   playback.block
-    # end
-    `play #{Clapper.path_to_audio}`
+    if will_clap
+      `play #{Clapper.path_to_audio} trim 0 5`
+    end
   end
 
   def self.path_to_audio
