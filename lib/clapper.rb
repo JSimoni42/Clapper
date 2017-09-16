@@ -1,5 +1,4 @@
 require "clapper/version"
-# require "audio-playback"
 require 'csv'
 
 module Clapper
