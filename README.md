@@ -1,6 +1,7 @@
 # Clapper
 
 A gem to encourage TDD. Applauds when you pass new tests.
+(rubygems page)[https://rubygems.org/gems/clapper]
 
 ## Installation
 
